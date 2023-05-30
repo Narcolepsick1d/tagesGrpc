@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package ImageUpload;
+
+option go_package = "github.com/Narcolepsick1d/testTages/pb";
+
+import "google/protobuf/empty.proto";
+
+
+message ImageData {
+  bytes data = 1;
+  string imageName = 2;
+}
+
+message ImageInfo {
+  string name = 1;
+  string createDate=2;
+  string updateDate=3;
+
+}
+
+message ImageRequest {
+  string imagesName = 1;
+}
+
+service ImageService {
+  rpc UploadImage(ImageData) returns (google.protobuf.Empty) {}
+  rpc ListImages(google.protobuf.Empty) returns (stream ImageInfo) {}
+  rpc DownloadImage(ImageRequest) returns (ImageData) {}
+}
